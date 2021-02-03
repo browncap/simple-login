@@ -1,8 +1,8 @@
-package com.login.auth
+package com.login.users
 
 import cats.implicits._
 import cats.effect.Sync
-import com.login.users.Users
+import com.login.auth.Tokens
 import com.login.{Password, TokenNotFound, UserId, Username}
 import dev.profunktor.auth.jwt.JwtToken
 import dev.profunktor.redis4cats.RedisCommands

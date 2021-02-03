@@ -3,8 +3,8 @@ package com.login.http
 import cats.implicits._
 import cats.effect.Sync
 import com.login.{LoginUser, UsernameInUse}
-import com.login.auth.UserAuth
 import com.login.Encoders._
+import com.login.users.UserAuth
 import io.chrisdavenport.log4cats.Logger
 import org.http4s.HttpRoutes
 import org.http4s.dsl.Http4sDsl

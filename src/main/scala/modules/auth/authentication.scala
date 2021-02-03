@@ -7,7 +7,7 @@ import dev.profunktor.auth.jwt._
 import com.login.auth.Crypto
 import dev.profunktor.redis4cats.RedisCommands
 import pdi.jwt._
-import com.login.users.Users
+import com.login.users.{Users, UserAuth}
 import io.chrisdavenport.log4cats.Logger
 
 final class Authentication[F[_]] private (

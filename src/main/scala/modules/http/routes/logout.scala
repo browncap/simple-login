@@ -2,8 +2,8 @@ package com.login.http
 
 import cats.syntax.all._
 import cats.effect.Sync
+import com.login.users.UserAuth
 import com.login.{TokenHeaderNotFound, UserId}
-import com.login.auth.UserAuth
 import dev.profunktor.auth.AuthHeaders
 import io.chrisdavenport.log4cats.Logger
 import org.http4s.AuthedRoutes
