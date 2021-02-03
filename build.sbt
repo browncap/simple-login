@@ -61,3 +61,4 @@ libraryDependencies ++= Seq(
 )
 
 addCompilerPlugin("com.olegpy" %% "better-monadic-for" % "0.3.0")
+enablePlugins(DockerComposePlugin)
