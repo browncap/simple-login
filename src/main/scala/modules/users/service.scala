@@ -4,7 +4,8 @@ import cats.effect.Sync
 import io.chrisdavenport.fuuid.FUUID
 import cats.implicits._
 import com.login.auth.Crypto
-import com.login.{DoobieRepository, InvalidUsernameOrPassword, Password, User, UserId, UserNotFound, Username}
+import com.login.{InvalidUsernameOrPassword, Password, User, UserId, UserNotFound, Username}
+import com.login.users.UserRepository
 
 trait Users[F[_]] {
   def find(username: Username, password: Password): F[User]
@@ -13,7 +14,7 @@ trait Users[F[_]] {
 }
 
 object Users {
-  def build[F[_]](repo: DoobieRepository[F], crypto: Crypto[F])(implicit F: Sync[F]): Users[F] = {
+  def build[F[_]](repo: UserRepository[F], crypto: Crypto[F])(implicit F: Sync[F]): Users[F] = {
     new Users[F] {
       override def find(username: Username, password: Password): F[User] = for {
         userAndHash <- repo.getUserAndHash(username).flatMap(F.fromOption(_, UserNotFound(username)))

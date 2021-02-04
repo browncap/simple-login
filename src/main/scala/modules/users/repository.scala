@@ -1,7 +1,8 @@
-package com.login
+package com.login.users
 
 import cats.implicits._
 import cats.effect.{Bracket, Sync}
+import com.login.{HashedPassword, User, UserId, Username, UsernameInUse}
 import doobie.free.connection.ConnectionIO
 import doobie.util.query.Query0
 import doobie.util.transactor.Transactor
@@ -15,14 +16,14 @@ import io.chrisdavenport.fuuid.FUUID
 
 final case class UserAndHash(userId: UserId, hashedPassword: HashedPassword)
 
-trait DoobieRepository[F[_]]{
+trait UserRepository[F[_]]{
   def getUserAndHash(username: Username): F[Option[UserAndHash]]
   def getUserWithUsername(username: Username): F[Option[User]]
   def createUser(userId: FUUID, username: Username, password: HashedPassword): F[Unit]
 }
 
-object PostgresRepository {
-  def build[F[_]](transactor: Transactor[F])(implicit F: Sync[F], ev: Bracket[F, Throwable]): DoobieRepository[F] = new DoobieRepository[F] {
+object PostgresUserRepository {
+  def build[F[_]](transactor: Transactor[F])(implicit F: Sync[F], ev: Bracket[F, Throwable]): UserRepository[F] = new UserRepository[F] {
     import Queries._
 
     def getUserAndHash(username: Username): F[Option[UserAndHash]] = {

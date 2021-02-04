@@ -10,6 +10,7 @@ import org.http4s.server.blaze.BlazeServerBuilder
 import com.login.auth.Authentication
 import com.login.config.{ConfigService, PostgresConfig}
 import com.login.http.RoutesApp
+import com.login.users.PostgresUserRepository
 import dev.profunktor.redis4cats.Redis
 import dev.profunktor.redis4cats.effect.Log.Stdout._
 import io.chrisdavenport.log4cats.SelfAwareStructuredLogger
@@ -27,7 +28,7 @@ object Server {
       cfg <- Resource.liftF(ConfigService.getConfig)
       trans <- buildTransactor[F](cfg.postgres)
       redis <- Redis[F].utf8(cfg.redis.uri)
-      repo = PostgresRepository.build(trans)
+      repo = PostgresUserRepository.build(trans)
       auth = Authentication.build(cfg.jwt, redis, repo)
       svc = RoutesApp.build[F](auth).app
       server <- Resource.liftF(buildServer(ec)(svc))
