@@ -1,9 +1,10 @@
-package com.login.auth
+package com.login.users
 
 import java.util.concurrent.TimeUnit
 
 import cats.effect.{ContextShift, IO}
-import com.login.{HashedPassword, Migrator, Password, PostgresRepository, User, UserId, UserNotFound, Username}
+import com.login.auth.{BCrypto, JwtTokens}
+import com.login.{HashedPassword, Migrator, Password, User, UserId, UserNotFound, Username}
 import doobie.util.transactor.Transactor
 import io.chrisdavenport.fuuid.FUUID
 import io.chrisdavenport.fuuid.circe._
@@ -61,7 +62,7 @@ class UserAuthSpec extends FlatSpec with Matchers with BeforeAndAfterAll {
 
   implicit val logger = Slf4jLogger.create[IO].unsafeRunSync()
 
-  def doobie = PostgresRepository.build[IO](transactor)
+  def doobie = PostgresUserRepository.build[IO](transactor)
   def crypto = BCrypto.build[IO]
   def userSvc = Users.build[IO](doobie, crypto)
   def tokens = JwtTokens.build[IO](jwtConfig)

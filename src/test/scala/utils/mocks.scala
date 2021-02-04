@@ -1,12 +1,13 @@
-package com.login
+package com.login.utils
 
 import cats.effect.IO
-import com.login.auth.UserAuth
+import com.login.{HashedPassword, Password, User, UserId, Username}
+import com.login.users.{UserAndHash, UserAuth, UserRepository}
 import dev.profunktor.auth.jwt.JwtToken
 import io.chrisdavenport.fuuid.FUUID
 import pdi.jwt.JwtClaim
 
-class MockDoobieRepository extends DoobieRepository[IO]{
+class MockDoobieRepository extends UserRepository[IO]{
   def getUserAndHash(username: Username): IO[Option[UserAndHash]] = ???
   def getUserWithUsername(username: Username): IO[Option[User]] = ???
   def createUser(userId: FUUID, username: Username, hashedPassword: HashedPassword): IO[Unit] = ???

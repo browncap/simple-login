@@ -1,7 +1,8 @@
 package com.login.http
 
 import cats.effect.IO
-import com.login.{MockUserAuth, UserId}
+import com.login.UserId
+import com.login.utils.MockUserAuth
 import dev.profunktor.auth.JwtAuthMiddleware
 import dev.profunktor.auth.jwt.{JwtAuth, JwtToken}
 import io.chrisdavenport.fuuid.FUUID
