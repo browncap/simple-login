@@ -8,3 +8,7 @@ docker-compose up
 sbt test
 docker-compose down
 ```
+or, alternatively:
+```
+sbt dockerComposeTest
+```
