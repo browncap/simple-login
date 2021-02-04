@@ -5,7 +5,6 @@ import io.chrisdavenport.fuuid.FUUID
 import cats.implicits._
 import com.login.auth.Crypto
 import com.login.{InvalidUsernameOrPassword, Password, User, UserId, UserNotFound, Username}
-import com.login.users.UserRepository
 
 trait Users[F[_]] {
   def find(username: Username, password: Password): F[User]

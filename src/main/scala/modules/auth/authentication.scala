@@ -4,7 +4,6 @@ import cats.effect._
 import com.login.UserJwtAuth
 import com.login.config.JwtConfig
 import dev.profunktor.auth.jwt._
-import com.login.auth.Crypto
 import dev.profunktor.redis4cats.RedisCommands
 import pdi.jwt._
 import com.login.users.{UserAuth, UserRepository, Users}

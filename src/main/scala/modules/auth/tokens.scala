@@ -5,7 +5,6 @@ import java.time.Clock
 import cats.effect.Sync
 import com.login.config.JwtConfig
 import dev.profunktor.auth.jwt._
-import io.chrisdavenport.fuuid.FUUID
 import pdi.jwt.{JwtAlgorithm, JwtClaim}
 import io.circe.syntax._
 import cats.implicits._
